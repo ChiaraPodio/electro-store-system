@@ -1,0 +1,16 @@
+package com.ChiaraPodio.sale_service.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class SaleDetailsDTO {
+
+    private Long product_id;
+    private Integer product_quantity;
+}
