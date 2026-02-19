@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+  eureka-sv:
+    build: eureka-sv
+    mem_limit: 512m
+    ports:
+      - "8761:8761"
+    networks:
+      - 'sales-network'
+
+  products-service:
+    build: products-service
+    mem_limit: 512m
+    ports:
+      - "8084:8084"
+    networks:
+      - 'sales-network'
+
+  cart-service:
+    build: cart-service
+    mem_limit: 512m
+    ports:
+      - "8083:8083"
+    networks:
+      - 'sales-network'
+
+  sale-service:
+    build: sale-service
+    mem_limit: 512m
+    ports:
+      - "8082:8082"
+    networks:
+      - 'sales-network'
+
+  api-gateway:
+    build: api-gateway
+    mem_limit: 512m
+    ports:
+      - "443:443"
+    networks:
+      - 'sales-network'
+
+  config-server:
+    build: config-server
+    mem_limit: 512m
+    ports:
+      - "8081:8081"
+    networks:
+      - 'sales-network'
+
+networks:
+  sales-network:
