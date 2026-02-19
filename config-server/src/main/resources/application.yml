@@ -9,7 +9,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/ChiaraPodio/repo-config-server.git
+          uri: https://github.com/ChiaraPodio/electro-store-system
           searchPaths: config-data
           username: ${GIT_USER}
           password: ${GIT_PASSWORD}
