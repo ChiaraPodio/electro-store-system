@@ -5,6 +5,8 @@ import com.ChiaraPodio.sale_service.dto.CartResponseDTO;
 import com.ChiaraPodio.sale_service.model.Sale;
 import com.ChiaraPodio.sale_service.repository.ICartAPI;
 import com.ChiaraPodio.sale_service.repository.ISaleRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,8 @@ public class SaleService implements ISaleService{
     }
 
     @Override
+    @CircuitBreaker(name = "cart-service", fallbackMethod = "fallbackEditSale")
+    @Retry(name="cart-service")
     public void editSale(Long sale_id, LocalDate sale_date, CartDTO cartDTO) {
         Sale sale = this.findSale(sale_id);
 
@@ -59,6 +63,8 @@ public class SaleService implements ISaleService{
     }
 
     @Override
+    @CircuitBreaker(name = "cart-service", fallbackMethod = "fallbackCreateSale")
+    @Retry(name="cart-service")
     public void createSale(CartDTO cartDTO) {
         Sale sale = new Sale();
         sale.setSale_date(LocalDate.now());
@@ -68,4 +74,13 @@ public class SaleService implements ISaleService{
 
         this.saveSale(sale);
     }
+
+    public void fallbackEditSale(Long sale_id, LocalDate sale_date, CartDTO cartDTO, Throwable ex) {
+        throw new RuntimeException("En este momento no se puede editar la venta.");
+    }
+
+    public void fallbackCreateSale(CartDTO cartDTO, Throwable ex) {
+        throw new RuntimeException("En este momento no se puede realizar la venta.");
+    }
+
 }

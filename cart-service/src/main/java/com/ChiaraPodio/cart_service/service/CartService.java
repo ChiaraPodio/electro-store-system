@@ -8,9 +8,6 @@ import com.ChiaraPodio.cart_service.gateway.ProductGateway;
 import com.ChiaraPodio.cart_service.model.Cart;
 import com.ChiaraPodio.cart_service.model.SaleDetails;
 import com.ChiaraPodio.cart_service.repository.ICartRepository;
-import com.ChiaraPodio.cart_service.repository.IProductsAPI;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +20,8 @@ public class CartService implements ICartService{
     @Autowired
     private ICartRepository cartRepo;
 
-    @Autowired
-    private IProductsAPI apiProducts;
+//    @Autowired
+//    private IProductsAPI apiProducts;
 
     @Autowired
     private ProductGateway productGateway;
@@ -94,20 +91,21 @@ public class CartService implements ICartService{
     }
 
     @Override
-    @CircuitBreaker(name = "product-service", fallbackMethod = "fallbackCreateDetails")
+//    @CircuitBreaker(name = "products-service", fallbackMethod = "fallbackCreateDetails")
+//    @Retry(name="products-service")
     public List<SaleDetails> createDetails (Cart cart, List<SaleDetailsDTO> detailsListDTO) {
         List<SaleDetails> saleDetailsList = new ArrayList<>();
 
         for (SaleDetailsDTO saleDetailDTO : detailsListDTO) {
             SaleDetails saleDetails = new SaleDetails();
-            ProductDTO product = apiProducts.getProductById(saleDetailDTO.getProduct_id());
+            ProductDTO product = productGateway.getProductById(saleDetailDTO.getProduct_id());
 
             saleDetails.setCart(cart);
             saleDetails.setProduct_id(product.getProduct_id());
             saleDetails.setProduct_quantity(saleDetailDTO.getProduct_quantity());
             saleDetails.setPrice(product.getCurrent_price());
             saleDetails.setSubtotal(product.getCurrent_price() * saleDetailDTO.getProduct_quantity());
-            apiProducts.removeStock(product.getProduct_id(), saleDetailDTO.getProduct_quantity());
+            productGateway.removeStock(product.getProduct_id(), saleDetailDTO.getProduct_quantity());
             saleDetailsList.add(saleDetails);
         }
         return saleDetailsList;
@@ -122,21 +120,21 @@ public class CartService implements ICartService{
         return total;
     }
 
-    public List<SaleDetails> fallbackCreateDetails(Cart cart,
-                                                   List<SaleDetailsDTO> detailsListDTO,
-                                                   Throwable ex) {
-        throw new RuntimeException("En este momento no se puede crear la venta.");
-    }
+//    public List<SaleDetails> fallbackCreateDetails(Cart cart,
+//                                                   List<SaleDetailsDTO> detailsListDTO,
+//                                                   Throwable ex) {
+//        throw new RuntimeException("En este momento no se puede crear el carrito.");
+//    }
 
-    public CartResponseDTO fallbackEditCart(Long cart_id, CartDTO cartDTO, Throwable ex) {
-
-        throw new RuntimeException("No se pudo editar la venta.");
-    }
-
-    public void rollBackEditCart (List<SaleDetails> detailsListError) {
-        for (SaleDetails saleDetail : detailsListError) {
-            apiProducts.removeStock(saleDetail.getProduct_id(), saleDetail.getProduct_quantity());
-        }
-    }
+//    public CartResponseDTO fallbackEditCart(Long cart_id, CartDTO cartDTO, Throwable ex) {
+//
+//        throw new RuntimeException("No se pudo editar el carrito.");
+//    }
+//
+//    public void rollBackEditCart (List<SaleDetails> detailsListError) {
+//        for (SaleDetails saleDetail : detailsListError) {
+//            apiProducts.removeStock(saleDetail.getProduct_id(), saleDetail.getProduct_quantity());
+//        }
+//    }
 
 }
