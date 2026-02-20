@@ -7,18 +7,18 @@ El sistema implementa API Gateway, balanceo de carga, mecanismos de resiliencia 
 Simula una tienda online de electrodomésticos donde los microservicios de productos, carritos y ventas interactúan de manera desacoplada mediante OpenFeign.
 
 ## Tecnologías Utilizadas
-* Java 17
-* Spring Boot
-* Spring Cloud
+** Java 17
+** Spring Boot
+** Spring Cloud
 - Eureka Server (Service Discovery)
 - Spring Cloud Gateway (API Gateway)
 - Spring Cloud LoadBalancer
 - Spring Cloud Config Server
 - OpenFeign 
 - Resilience4J
-* Maven
-* JPA / Hibernate
-* Docker
+** Maven
+** JPA / Hibernate
+** Docker
 
 ## Arquitectura
 
@@ -68,9 +68,9 @@ El sistema está compuesto por los siguientes microservicios:
 
 * Implementa Spring Cloud LoadBalancer: se pueden ejecutar múltiples instancias de algunos servicios para balancear la carga
 * Implementación de Circuit Breaker (Resilience4J):
-- Prevención de fallas en cascada
-- Implementación de métodos fallback para gestionar fallos repetidos de comunicación entre servicios
-- Implementación de reintentos de comunicación automáticos
+  -Prevención de fallas en cascada
+  -Implementación de métodos fallback para gestionar fallos repetidos de comunicación entre servicios
+  -Implementación de reintentos de comunicación automáticos
 * Comunicación fluida entre servicios mediante OpenFeign
 * Aplicación de buenas prácticas de diseño y separación de responsabilidades
 * Arquitectura en capas y orientada a servicios
