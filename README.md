@@ -8,8 +8,11 @@ Simula una tienda online de electrodomésticos donde los microservicios de produ
 
 ## Tecnologías Utilizadas
 Java 17
+
 Spring Boot
+
 Spring Cloud
+
 - Eureka Server (Service Discovery)
 - Spring Cloud Gateway (API Gateway)
 - Spring Cloud LoadBalancer
@@ -17,7 +20,9 @@ Spring Cloud
 - OpenFeign 
 - Resilience4J
 Maven
+
 JPA / Hibernate
+
 Docker
 
 ## Arquitectura
