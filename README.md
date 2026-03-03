@@ -4,7 +4,7 @@ Backend de e-commerce desarrollado bajo una arquitectura de microservicios utili
 
 El sistema implementa API Gateway, balanceo de carga, mecanismos de resiliencia y una configuración centralizada para garantizar una comunicación confiable entre servicios.
 
-Simula una tienda online de electrodomésticos donde los microservicios de productos, carritos y ventas interactúan de manera desacoplada mediante OpenFeign.
+Simula una tienda online de electrodomésticos donde los microservicios de productos, carritos y ventas interactúan de manera desacoplada mediante Feign.
 
 ## Tecnologías Utilizadas
 * Java 17
@@ -14,7 +14,7 @@ Simula una tienda online de electrodomésticos donde los microservicios de produ
   - Spring Cloud Gateway (API Gateway)
   - Spring Cloud LoadBalancer
   - Spring Cloud Config Server
-  - OpenFeign
+  - Feign
   - Resilience4J
 * Maven
 * JPA / Hibernate
@@ -34,7 +34,7 @@ El sistema está compuesto por los siguientes microservicios:
 
 - Gestiona los carritos de compra a través de un CRUD
 - Crea el detalle de los carritos, calculando dinámicamente totales y subtotales 
-- Se comunica con products-service mediante OpenFeign para obtener productos y actualizar su stock al crear, editar o eliminar un carrito
+- Se comunica con products-service mediante Feign para obtener productos y actualizar su stock al crear, editar o eliminar un carrito
 - Implementa mecanismos de resiliencia ante fallas en la comunicación
 - Permite múltiples instancias para balancear la carga
 - Persiste los carritos en una base de datos
@@ -42,7 +42,7 @@ El sistema está compuesto por los siguientes microservicios:
 ### sale-service 
 
 - Gestiona las ventas a través de un CRUD
-- Asocia cada venta a un carrito, consumiendo la api cart-service mediante OpenFeign y la de products-service a través de la anterior
+- Asocia cada venta a un carrito, consumiendo la api cart-service mediante Feign y la de products-service a través de la anterior
 - Implementa mecanismos de resiliencia ante fallas en la comunicación
 - Permite múltiples instancias para balancear la carga
 - Persiste las ventas en una base de datos
@@ -71,7 +71,7 @@ El sistema está compuesto por los siguientes microservicios:
   - Prevención de fallas en cascada
   - Implementación de métodos fallback para gestionar fallos repetidos de comunicación entre servicios
   - Implementación de reintentos de comunicación automáticos
-* Comunicación fluida entre servicios mediante OpenFeign
+* Comunicación fluida entre servicios mediante Feign
 * Aplicación de buenas prácticas de diseño y separación de responsabilidades
 * Arquitectura en capas y orientada a servicios
 * Además del CRUD, cada servicio incluye los métodos de lógica de negocio necesarios para su correcto funcionamiento
