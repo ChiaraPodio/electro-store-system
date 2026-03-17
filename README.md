@@ -2,7 +2,7 @@
 
 Sistema backend de e-commerce diseñado para gestionar la compra de productos en una tienda online de electrodomésticos. Permite a los usuarios consultar productos, gestionar carritos de compra y procesar ventas, mientras gestiona automáticamente el stock, los totales y la persistencia.
 
-La solución está desarrollada bajo una arquitectura de microservicios utilizando Spring Boot y Spring Cloud, garantizando escalabilidad, resiliencia y una comunicación desacoplada entre servicios.
+La solución está desarrollada bajo una arquitectura de microservicios utilizando Spring Boot y Spring Cloud.
 
 ## Tecnologías Utilizadas
 * Java 17
