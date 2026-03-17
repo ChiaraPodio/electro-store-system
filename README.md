@@ -1,10 +1,8 @@
 # Electro Store System
 
-Backend de e-commerce desarrollado bajo una arquitectura de microservicios utilizando Spring Boot y Spring Cloud.
+Sistema backend de e-commerce diseñado para gestionar la compra de productos en una tienda online de electrodomésticos. Permite a los usuarios explorar productos, agregarlos a un carrito y concretar compras, mientras gestiona automáticamente el stock, los totales y la persistencia de las ventas.
 
-El sistema implementa API Gateway, balanceo de carga, mecanismos de resiliencia y una configuración centralizada para garantizar una comunicación confiable entre servicios.
-
-Simula una tienda online de electrodomésticos donde los microservicios de productos, carritos y ventas interactúan de manera desacoplada mediante Feign.
+La solución está desarrollada bajo una arquitectura de microservicios utilizando Spring Boot y Spring Cloud, garantizando escalabilidad, resiliencia y una comunicación desacoplada entre servicios.
 
 ## Tecnologías Utilizadas
 * Java 17
