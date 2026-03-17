@@ -1,6 +1,6 @@
 # Electro Store System
 
-Sistema backend de e-commerce diseñado para gestionar la compra de productos en una tienda online de electrodomésticos. Permite a los usuarios explorar productos, agregarlos a un carrito y concretar compras, mientras gestiona automáticamente el stock, los totales y la persistencia de las ventas.
+Sistema backend de e-commerce diseñado para gestionar la compra de productos en una tienda online de electrodomésticos. Permite a los usuarios consultar productos, gestionar carritos de compra y procesar ventas, mientras gestiona automáticamente el stock, los totales y la persistencia.
 
 La solución está desarrollada bajo una arquitectura de microservicios utilizando Spring Boot y Spring Cloud, garantizando escalabilidad, resiliencia y una comunicación desacoplada entre servicios.
 
