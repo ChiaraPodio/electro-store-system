@@ -1,18 +1,20 @@
 package com.ChiaraPodio.products_service.service;
 
+import com.ChiaraPodio.products_service.dto.ProductRequestDto;
 import com.ChiaraPodio.products_service.model.Product;
 import com.ChiaraPodio.products_service.repository.IProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Service
 public class ProductService implements IProductService {
 
-    @Autowired
-    private IProductRepository productRepo;
+    private final IProductRepository productRepo;
+
+    public ProductService(IProductRepository productRepo) {
+        this.productRepo = productRepo;
+    }
 
     @Override
     public void saveProduct(Product product) {
@@ -32,19 +34,27 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product editProduct(Long product_id, String newName, String newBrand, Double newCurrent_price, Integer newStock) {
-        Product product = this.findProduct(product_id);
+    public Product editProduct(Long product_id, ProductRequestDto productRequestDto) {
 
-        if (newName != null) {
-            product.setName(newName);}
-        if (newBrand != null) {
-            product.setBrand(newBrand);}
-        if (newCurrent_price != null) {
-            product.setCurrent_price(newCurrent_price);}
-        if (newStock != null) {
-            product.setStock(newStock);}
+        Product product = findProduct(product_id);
 
-        this.saveProduct(product);
+        if (productRequestDto.getName() != null) {
+            product.setName(productRequestDto.getName());
+        }
+
+        if (productRequestDto.getBrand() != null) {
+            product.setBrand(productRequestDto.getBrand());
+        }
+
+        if (productRequestDto.getCurrent_price() != null) {
+            product.setCurrent_price(productRequestDto.getCurrent_price());
+        }
+
+        if (productRequestDto.getStock() != null) {
+            product.setStock(productRequestDto.getStock());
+        }
+
+        saveProduct(product);
 
         return product;
     }
@@ -65,6 +75,18 @@ public class ProductService implements IProductService {
     public void addStock (Long product_id,Integer addit_product_quantity) {
         Product product = this.findProduct(product_id);
         product.setStock(product.getStock() + addit_product_quantity);
+        this.saveProduct(product);
+    }
+
+    @Override
+    public void createProduct (ProductRequestDto productRequestDto) {
+        Product product = new Product();
+
+        product.setName(productRequestDto.getName());
+        product.setBrand(productRequestDto.getBrand());
+        product.setCurrent_price(productRequestDto.getCurrent_price());
+        product.setStock(productRequestDto.getStock());
+
         this.saveProduct(product);
     }
 

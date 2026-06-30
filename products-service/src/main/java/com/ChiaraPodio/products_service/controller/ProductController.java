@@ -1,8 +1,8 @@
 package com.ChiaraPodio.products_service.controller;
 
+import com.ChiaraPodio.products_service.dto.ProductRequestDto;
 import com.ChiaraPodio.products_service.model.Product;
 import com.ChiaraPodio.products_service.service.IProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,12 +11,15 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private IProductService productServ;
+    private final IProductService productServ;
+
+    public ProductController(IProductService productServ) {
+        this.productServ = productServ;
+    }
 
     @PostMapping("/save")
-    public void saveProduct (@RequestBody Product product) {
-        productServ.saveProduct(product);
+    public void createProduct (@RequestBody ProductRequestDto productRequestDto) {
+        productServ.createProduct(productRequestDto);
     }
 
     @GetMapping("/{product_id}")
@@ -29,13 +32,12 @@ public class ProductController {
         return productServ.getProducts();
     }
 
-    @PutMapping("/edit/{product_id}")
-    public Product editProduct(@PathVariable Long product_id,
-                                 @RequestParam (required = false) String newName,
-                                 @RequestParam (required = false) String newBrand,
-                                 @RequestParam (required = false) Double newCurrent_price,
-                                 @RequestParam (required = false) Integer newStock) {
-        return productServ.editProduct(product_id, newName, newBrand, newCurrent_price, newStock);
+    @PatchMapping("/{id}")
+    public Product editProductPartially(
+            @PathVariable Long id,
+            @RequestBody ProductRequestDto productRequestDto) {
+
+        return productServ.editProduct(id, productRequestDto);
     }
 
     @DeleteMapping("/delete/{product_id}")
