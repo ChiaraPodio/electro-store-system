@@ -14,6 +14,10 @@ La solución está desarrollada bajo una arquitectura de microservicios utilizan
   - Spring Cloud Config Server
   - OpenFeign
   - Resilience4J
+* Testing Unitario
+  - JUnit
+  - Mockito
+  - MockMVC
 * Maven
 * JPA / Hibernate
 * Docker
@@ -27,6 +31,7 @@ El sistema está compuesto por los siguientes microservicios:
 - Gestiona los productos a través de un CRUD
 - Incluye lógica de actualización de stock
 - Persiste los productos en una base de datos
+- Incluye testing unitario de servicios y controladores utilizando JUnit 5, Mockito y MockMvc.
 
 ### cart-service 
 
@@ -64,6 +69,7 @@ El sistema está compuesto por los siguientes microservicios:
 
 ## Aspectos Destacados del Proyecto
 
+* Implementación de pruebas unitarias con JUnit, Mockito y MockMVC para mejorar la calidad y confiabilidad del código.
 * Implementa Spring Cloud LoadBalancer: se pueden ejecutar múltiples instancias de algunos servicios para balancear la carga
 * Implementación de Circuit Breaker (Resilience4J):
   - Prevención de fallas en cascada
