@@ -14,7 +14,7 @@ La solución está desarrollada bajo una arquitectura de microservicios utilizan
   - Spring Cloud Config Server
   - OpenFeign
   - Resilience4J
-* Testing Unitario
+* Testing
   - JUnit
   - Mockito
   - MockMVC
